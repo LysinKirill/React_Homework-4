@@ -10,8 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
             <input type="text" placeholder="Search products..." className="sidebar-item" />
             <label className="sidebar-item">
-                <input type="checkbox" />
-                Show only items in stock
+                Show only items in stock <input type="checkbox" />
             </label>
             <select className="sidebar-item">
                 <option value="">All Categories</option>

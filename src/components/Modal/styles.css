@@ -82,9 +82,6 @@
     box-shadow: 2px 2px 5px 2px #cccccc;
 }
 
-.modal-close {
-    color: transparent;
-}
 
 .modal-close:hover {
     color: #333;
