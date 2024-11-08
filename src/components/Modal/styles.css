@@ -1,5 +1,4 @@
-﻿
-.modal-overlay {
+﻿.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,15 +13,14 @@
 
 .modal-content {
     background: #fff;
-    padding: 24px;
-    width: 70%;
-    max-width: 800px;
-    height: auto;
+    padding: 0 24px;
+    width: 60%;
+    max-width: 60%;
+    height: 80%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    gap: 16px;
     position: relative;
 }
 
@@ -42,23 +40,25 @@
 .modal-body {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    margin: 0;
 }
 
 .modal-image {
-    height: 300px;
+    margin: 0;
+    height: 30%;
     width: auto;
-    object-fit: contain; /* Will ensure the full image fits within the bounds */
+    object-fit: contain;
     border-radius: 8px;
 }
 
 
 .modal-content h3 {
-    margin-top: 0;
+    margin: 0;
     font-size: 24px;
 }
 
 .modal-content p {
+    margin: 0;
     font-size: 16px;
     color: #555;
 }

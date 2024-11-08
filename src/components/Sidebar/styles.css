@@ -43,8 +43,8 @@
 }
 
 .sidebar label {
-    display: flex; /* Align items inline */
-    align-items: center; /* Vertically center the checkbox with text */
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
     background-color: #090d3c;
 }
