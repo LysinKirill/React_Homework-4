@@ -1,6 +1,6 @@
 ﻿.sidebar {
-    border-right: 1px solid #ddd;
-    background-color: rgb(7, 8, 37);
+    border-right: 1px solid #080b2e;
+    background-color: rgb(3, 3, 23);
     padding: 16px;
     position: fixed;
     top: 80px;
@@ -29,7 +29,7 @@
 .sidebar select {
     display: block;
     margin-bottom: 10px;
-    background-color: #0b145c;
+    background-color: #090d3c;
     border: none;
 }
 
@@ -46,7 +46,7 @@
     display: flex; /* Align items inline */
     align-items: center; /* Vertically center the checkbox with text */
     margin-bottom: 10px;
-    background-color: #0b145c;
+    background-color: #090d3c;
 }
 
 .sidebar-item {
