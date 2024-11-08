@@ -1,21 +1,61 @@
 ﻿.sidebar {
     border-right: 1px solid #ddd;
     background-color: rgb(7, 8, 37);
-    padding: 100px 16px 60px;
-    position: sticky;
+    padding: 16px;
+    position: fixed;
+    top: 80px;
     left: 0;
-    top: 0;
     bottom: 0;
     width: 250px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     transform: translateX(-100%);
+    opacity: 1;
+    pointer-events: auto;
 }
-
 
 .sidebar.open {
     transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .sidebar.closed {
     transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar input,
+.sidebar label,
+.sidebar select {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.sidebar-item {
+    display: block;
+    margin-bottom: 10px;
+    width: 80%;
+    padding: 8px;
+    color: #8f8f97;
+}
+
+.sidebar input[type="text"]::-webkit-input-placeholder
+{
+    width: 80%;
+    color: #5f62ae;
+}
+.sidebar select ::-webkit-input-placeholder{
+    width: 87%;
+    color: #5f62ae;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    text-align: center;
 }

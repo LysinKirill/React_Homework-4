@@ -7,9 +7,10 @@
     padding: 16px;
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 10;
-    height: 60px; /* Set a fixed height for consistent layout */
+    height: 60px;
 }
 
 .navigation-bar button {

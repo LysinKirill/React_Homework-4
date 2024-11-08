@@ -7,13 +7,13 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     return (
-        <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-            <input type="text" placeholder="Search products..." />
-            <label>
+        <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+            <input type="text" placeholder="Search products..." className="sidebar-item" />
+            <label className="sidebar-item">
                 <input type="checkbox" />
                 Show only items in stock
             </label>
-            <select>
+            <select className="sidebar-item">
                 <option value="">All Categories</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Furniture">Furniture</option>
