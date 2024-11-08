@@ -1,0 +1,110 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Car",
+    "description": "A reliable, fuel-efficient sedan perfect for daily commuting and long road trips. Featuring advanced safety features, a spacious interior, and excellent fuel economy.",
+    "category": "Auto",
+    "quantity": 10,
+    "unit": "pcs",
+    "image": "/src/assets/car.png"
+  },
+  {
+    "id": 2,
+    "name": "Electric Bike",
+    "description": "A high-performance electric bike designed for urban commuting. It features a long-lasting battery, adjustable speed modes, and a lightweight frame for a smooth ride.",
+    "category": "Sports & Outdoors",
+    "quantity": 25,
+    "unit": "pcs",
+    "image": "/src/assets/electric_bike.png"
+  },
+  {
+    "id": 3,
+    "name": "Smartphone",
+    "description": "A cutting-edge smartphone with a stunning display, high-speed performance, and an advanced camera system. Comes with 128GB of storage and 5G connectivity.",
+    "category": "Electronics",
+    "quantity": 50,
+    "unit": "pcs",
+    "image": "/src/assets/smartphone.png"
+  },
+  {
+    "id": 4,
+    "name": "Laptop",
+    "description": "A sleek, lightweight laptop with powerful specs for productivity and entertainment. Equipped with a high-resolution screen, long battery life, and fast processing power.",
+    "category": "Electronics",
+    "quantity": 15,
+    "unit": "pcs",
+    "image": "/src/assets/laptop.png"
+  },
+  {
+    "id": 5,
+    "name": "Wireless Headphones",
+    "description": "High-quality noise-canceling wireless headphones with deep bass and crystal-clear sound. Perfect for music lovers, commuters, and gamers.",
+    "category": "Audio",
+    "quantity": 30,
+    "unit": "pcs",
+    "image": "/src/assets/headphones.png"
+  },
+  {
+    "id": 6,
+    "name": "Coffee Machine",
+    "description": "A premium coffee machine with a built-in grinder, multiple brewing options, and a sleek modern design. Ideal for home or office use.",
+    "category": "Home Appliances",
+    "quantity": 12,
+    "unit": "pcs",
+    "image": "/src/assets/coffee-machine.png"
+  },
+  {
+    "id": 7,
+    "name": "Smartwatch",
+    "description": "A stylish smartwatch that tracks your fitness, health metrics, and notifications. Features a heart rate monitor, GPS, and customizable watch faces.",
+    "category": "Wearables",
+    "quantity": 20,
+    "unit": "pcs",
+    "image": "/src/assets/smartwatch.png"
+  },
+  {
+    "id": 8,
+    "name": "Gaming Console",
+    "description": "A next-generation gaming console with stunning graphics, fast loading times, and access to a wide range of games. Compatible with VR and streaming services.",
+    "category": "Gaming",
+    "quantity": 8,
+    "unit": "pcs",
+    "image": "/src/assets/gaming-console.png"
+  },
+  {
+    "id": 9,
+    "name": "Office Chair",
+    "description": "Ergonomically designed office chair for long hours of comfortable sitting. Adjustable height, lumbar support, and breathable fabric make it perfect for the workplace.",
+    "category": "Furniture",
+    "quantity": 25,
+    "unit": "pcs",
+    "image": "/src/assets/office-chair.png"
+  },
+  {
+    "id": 10,
+    "name": "Bluetooth Speaker",
+    "description": "Portable Bluetooth speaker with rich sound quality and a waterproof design. Perfect for outdoor adventures, beach trips, and casual listening.",
+    "category": "Audio",
+    "quantity": 40,
+    "unit": "pcs",
+    "image": "/src/assets/bluetooth-speaker.png"
+  },
+  {
+    "id": 11,
+    "name": "Electric Scooter",
+    "description": "An electric scooter designed for fast and efficient urban transportation. With a range of up to 25 miles on a single charge, it's ideal for short commutes and city cruising.",
+    "category": "Sports & Outdoors",
+    "quantity": 18,
+    "unit": "pcs",
+    "image": "/src/assets/electric-scooter.png"
+  },
+  {
+    "id": 12,
+    "name": "Digital Camera",
+    "description": "A professional digital camera with high resolution and advanced features for photographers. Includes a 24MP sensor, 4K video recording, and built-in WiFi.",
+    "category": "Electronics",
+    "quantity": 10,
+    "unit": "pcs",
+    "image": "/src/assets/digital-camera.png"
+  }
+]

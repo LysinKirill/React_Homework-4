@@ -1,0 +1,97 @@
+﻿
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 24px;
+    width: 70%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-image {
+    height: 300px;
+    width: auto;
+    object-fit: contain; /* Will ensure the full image fits within the bounds */
+    border-radius: 8px;
+}
+
+
+.modal-content h3 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: #555;
+}
+
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px 2px #cccccc;
+}
+
+.modal-close {
+    color: transparent;
+}
+
+.modal-close:hover {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition-duration: 0.2s;
+}
+
+.modal-close:not(:hover) {
+    transition-duration: 0.35s;
+}

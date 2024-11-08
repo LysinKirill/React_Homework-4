@@ -1,0 +1,41 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: black;
+}
+
+
+.card-field {
+  width: 100%; /* Ensure it takes up the rest of the space */
+  background-color: #f5f5f5;
+  padding: 16px;
+  height: 500px; /* Fixed height for the card field */
+  overflow-y: auto; /* Enable scrolling inside the card field */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns of cards */
+  grid-gap: 16px; /* Space between cards */
+  max-height: 100%; /* Ensure the cards fit in the scrollable area */
+  overflow-y: auto; /* Enables scroll only for the card container */
+}
+
+
+
+
+.main-content {
+  display: flex;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0;
+}
+
+/* If the sidebar is open, shift the main content */
+.main-content .sidebar.open + .product-list {
+  margin-left: 250px; /* Offset the main content to make room for the sidebar */
+}
