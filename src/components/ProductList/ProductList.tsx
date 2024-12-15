@@ -1,10 +1,10 @@
-﻿
-import React, { useState } from 'react';
-import { Box, Grid, Pagination} from '@mui/material';
+﻿import React, { useState } from 'react';
+import { Box, Grid, Pagination } from '@mui/material';
 import ProductCard from '../Card/Card';
-import products from '../../data/products.json'
+import {ProductListProps} from "./types.ts";
 
-const ProductList: React.FC = () => {
+
+const ProductList: React.FC<ProductListProps> = ({ products }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 

@@ -7,3 +7,8 @@
     unit: string;
     image?: string;
 }
+
+
+export interface ProductListProps {
+    products: IProductProps[];
+}

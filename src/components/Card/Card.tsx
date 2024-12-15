@@ -1,7 +1,7 @@
 ﻿import React, { useState } from "react";
 import { Card, CardContent, CardMedia, Typography, Tooltip, Dialog, DialogContent, Button } from "@mui/material";
 import { styled } from "@mui/system";
-import { IProductProps } from "./types.ts";
+import { IProductProps } from "./../ProductList/types";
 
 
 const StyledCard = styled(Card)(() => ({

@@ -13,7 +13,7 @@
     "name": "Electric Bike",
     "description": "A high-performance electric bike designed for urban commuting. It features a long-lasting battery, adjustable speed modes, and a lightweight frame for a smooth ride.",
     "category": "Sports & Outdoors",
-    "quantity": 25,
+    "quantity": 0,
     "unit": "pcs",
     "image": "/src/assets/electric_bike.png"
   },

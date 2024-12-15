@@ -27,6 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                 pointerEvents: isOpen ? 'auto' : 'none',
             }}
         >
+            {/* Search input */}
             <Box sx={{ mb: 2 }}>
                 <InputBase
                     placeholder="Search products..."
@@ -41,6 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                 />
             </Box>
 
+            {/* In stock checkbox */}
             <Box sx={{ mb: 2 }}>
                 <FormControlLabel
                     control={
