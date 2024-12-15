@@ -32,8 +32,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
                 <Box
                     sx={{
                         display: 'flex',
-                        justifyContent: 'space-evenly', // Evenly space the navigation buttons
-                        flexGrow: 1, // Make this container take all available space
+                        justifyContent: 'space-evenly',
+                        flexGrow: 1,
                     }}
                 >
                     <Button
@@ -42,7 +42,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
                             backgroundColor: 'transparent',
                             color: 'white',
                             fontSize: '16px',
-                            width: 'auto', // Ensures it does not take more space than needed
+                            width: 'auto',
                             '&:hover': {
                                 color: '#ddd',
                                 backgroundColor: 'transparent',
