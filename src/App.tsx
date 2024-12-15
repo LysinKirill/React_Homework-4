@@ -10,7 +10,6 @@ const App: React.FC = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [filteredProducts, setFilteredProducts] = useState(products);
     const [searchQuery, setSearchQuery] = useState('');
-    const [, setShowInStock] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [isInStock, setIsInStock] = useState(false);
 

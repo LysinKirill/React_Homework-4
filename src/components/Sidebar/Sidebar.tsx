@@ -8,8 +8,11 @@ import {
     MenuItem,
     Button,
     FormControl,
-    InputLabel
+    InputLabel,
+    InputAdornment,
+    IconButton
 } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear'; // Import the clear icon
 
 interface SidebarProps {
     isOpen: boolean;
@@ -45,9 +48,14 @@ const Sidebar: React.FC<SidebarProps> = ({
         onSearch(event.target.value);
     };
 
-    const handleInStockChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const handleInStockChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         setIsInStock(checked);
         onToggleInStock(checked);
+    };
+
+    const handleClearSearch = () => {
+        setSearchQuery('');
+        onSearch('');
     };
 
     return (
@@ -79,6 +87,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                     }}
                     onChange={handleSearchChange}
                     value={searchQuery}
+                    endAdornment={
+                        searchQuery ? (
+                            <InputAdornment position="end">
+                                <IconButton onClick={handleClearSearch} sx={{ color: '#5f62ae' }}>
+                                    <ClearIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        ) : null
+                    }
                 />
             </Box>
 
