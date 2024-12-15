@@ -27,7 +27,6 @@ const ProductList: React.FC = () => {
                 ))}
             </Grid>
 
-            {/* Pagination Component */}
             <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
                 <Pagination
                     count={Math.ceil(products.length / itemsPerPage)}
