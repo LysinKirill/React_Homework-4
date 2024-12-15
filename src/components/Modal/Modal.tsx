@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, name, image, description
                     height="300"
                     image={image}
                     alt={name}
-                    sx={{ objectFit: "contain", width: "100%" }} // Ensure the image fits inside the modal and does not overflow
+                    sx={{ objectFit: "contain", width: "100%" }}
                 />
                 <Button onClick={onClose} sx={{ mt: 2 }} variant="contained">
                     Close
