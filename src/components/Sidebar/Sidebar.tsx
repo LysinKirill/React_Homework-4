@@ -28,13 +28,13 @@ const Sidebar: React.FC<SidebarProps> = ({
                                              onResetFilters,
                                              categories,
                                          }) => {
-    // State to track the selected category
+
     const [selectedCategory, setSelectedCategory] = useState("");
 
-    // Handle category selection
-    const handleCategoryChange = (value) => {
-        setSelectedCategory(value); // Update the selected category in state
-        onCategoryChange(value); // Trigger the parent handler
+
+    const handleCategoryChange = (value: string) => {
+        setSelectedCategory(value);
+        onCategoryChange(value);
     };
 
     return (
