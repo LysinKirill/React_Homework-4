@@ -1,37 +1,44 @@
-﻿import React from 'react';
-import './styles.css';
-import {IProductProps} from '../Card/types';
-import imagePlaceholder from "../../assets/empty_image_placeholder.png";
+﻿import React from "react";
+import { Dialog, DialogContent, CardMedia, Typography, Button } from "@mui/material";
 
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
-    product: IProductProps | null;
+    name: string;
+    image: string;
+    description: string;
+    category: string;
+    quantity: number;
 }
 
-const Modal: React.FC<ModalProps> = ({isOpen, onClose, product}) => {
-    if (!isOpen || !product) return null;
-
-    const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-        event.currentTarget.src = imagePlaceholder;
-    };
-
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, name, image, description, category, quantity }) => {
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close" onClick={onClose}>×</button>
-                <div className="modal-header">
-                    <h2>Product card</h2>
-                </div>
-                <div className="modal-body">
-                    <img src={product.image} alt={product.name} className="modal-image" onError={handleImageError}/>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-                    <p><strong>Category:</strong> {product.category}</p>
-                    <p><strong>Quantity:</strong> {product.quantity} {product.unit}</p>
-                </div>
-            </div>
-        </div>
+        <Dialog open={isOpen} onClose={onClose} maxWidth="md" fullWidth>
+            <DialogContent>
+                <Typography variant="h4" gutterBottom>
+                    {name}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                    {description}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Category: {category}
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    Quantity: {quantity}
+                </Typography>
+                <CardMedia
+                    component="img"
+                    height="300"
+                    image={image}
+                    alt={name}
+                    sx={{ objectFit: "contain", width: "100%" }} // Ensure the image fits inside the modal and does not overflow
+                />
+                <Button onClick={onClose} sx={{ mt: 2 }} variant="contained">
+                    Close
+                </Button>
+            </DialogContent>
+        </Dialog>
     );
 };
 
