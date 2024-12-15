@@ -16,6 +16,7 @@ interface SidebarProps {
     onSearch: (query: string) => void;
     onToggleInStock: (checked: boolean) => void;
     onCategoryChange: (category: string) => void;
+    onApplyFilters: () => void;
     onResetFilters: () => void;
     categories: string[];
 }
@@ -25,16 +26,28 @@ const Sidebar: React.FC<SidebarProps> = ({
                                              onSearch,
                                              onToggleInStock,
                                              onCategoryChange,
+                                             onApplyFilters,
                                              onResetFilters,
                                              categories,
                                          }) => {
 
     const [selectedCategory, setSelectedCategory] = useState("");
-
+    const [searchQuery, setSearchQuery] = useState("");
+    const [isInStock, setIsInStock] = useState(false);
 
     const handleCategoryChange = (value: string) => {
         setSelectedCategory(value);
         onCategoryChange(value);
+    };
+
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(event.target.value);
+        onSearch(event.target.value);
+    };
+
+    const handleInStockChange = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+        setIsInStock(checked);
+        onToggleInStock(checked);
     };
 
     return (
@@ -54,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 pointerEvents: isOpen ? 'auto' : 'none',
             }}
         >
-            <Box sx={{mb: 2}}>
+            <Box sx={{ mb: 2 }}>
                 <InputBase
                     placeholder="Search products..."
                     sx={{
@@ -64,11 +77,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                         padding: '8px',
                         borderRadius: 1,
                     }}
-                    onChange={(e) => onSearch(e.target.value)}
+                    onChange={handleSearchChange}
+                    value={searchQuery}
                 />
             </Box>
 
-            <Box sx={{mb: 2}}>
+            <Box sx={{ mb: 2 }}>
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -78,7 +92,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                                     color: '#5f62ae',
                                 },
                             }}
-                            onChange={(e) => onToggleInStock(e.target.checked)}
+                            onChange={handleInStockChange}
+                            checked={isInStock}
                         />
                     }
                     label="Show only items in stock"
@@ -88,9 +103,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                 />
             </Box>
 
-            <Box sx={{mb: 2}}>
+            <Box sx={{ mb: 2 }}>
                 <FormControl fullWidth>
-                    <InputLabel sx={{color: '#5f62ae'}}>Category</InputLabel>
+                    <InputLabel sx={{ color: '#5f62ae' }}>Category</InputLabel>
                     <Select
                         value={selectedCategory}
                         onChange={(e) => handleCategoryChange(e.target.value)}
@@ -115,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </FormControl>
             </Box>
 
-            <Box sx={{display: 'flex', flexDirection: 'column'}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Button
                     onClick={onResetFilters}
                     sx={{
@@ -128,6 +143,20 @@ const Sidebar: React.FC<SidebarProps> = ({
                     }}
                 >
                     Reset Filters
+                </Button>
+
+                <Button
+                    onClick={onApplyFilters}
+                    sx={{
+                        width: '100%',
+                        padding: '8px',
+                        backgroundColor: '#5f62ae',
+                        color: '#fff',
+                        marginTop: '10px',
+                        borderRadius: 1,
+                    }}
+                >
+                    Apply Filters
                 </Button>
             </Box>
         </Box>

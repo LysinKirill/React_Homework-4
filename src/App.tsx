@@ -9,7 +9,10 @@ import { IProductProps } from './components/ProductList/types.ts';
 const App: React.FC = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [filteredProducts, setFilteredProducts] = useState(products);
+    const [searchQuery, setSearchQuery] = useState('');
     const [, setShowInStock] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [isInStock, setIsInStock] = useState(false);
 
     const categories = getUniqueCategories(products);
 
@@ -18,50 +21,68 @@ const App: React.FC = () => {
     };
 
     const handleToggleInStock = (checked: boolean) => {
-        setShowInStock(checked);
-
-        if (checked) {
-            setFilteredProducts(products.filter((product) => product.quantity > 0));
-        } else {
-            setFilteredProducts(products);
-        }
+        setIsInStock(checked);
     };
 
     const handleCategoryChange = (category: string) => {
-        if (category === '') {
-            setFilteredProducts(products);
-        } else {
-            setFilteredProducts(products.filter((product) => product.category === category));
+        setSelectedCategory(category);
+    };
+
+    const handleSearchChange = (query: string) => {
+        setSearchQuery(query);
+    };
+
+    const applyFilters = () => {
+        let filtered = products;
+
+        if (searchQuery) {
+            const regex = new RegExp(searchQuery, 'i');
+            filtered = filtered.filter((product) => regex.test(product.name));
         }
+
+        if (isInStock) {
+            filtered = filtered.filter((product) => product.quantity > 0);
+        }
+
+        if (selectedCategory && selectedCategory !== '') {
+            filtered = filtered.filter((product) => product.category === selectedCategory);
+        }
+
+        setFilteredProducts(filtered);
+    };
+
+    const resetFilters = () => {
+        setSearchQuery('');
+        setSelectedCategory('');
+        setIsInStock(false);
+        setFilteredProducts(products);
     };
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
             <NavigationBar toggleSidebar={toggleSidebar} />
 
-            <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width:"100%" }}>
+            <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width: '100%' }}>
                 <Sidebar
                     isOpen={isSidebarOpen}
-                    onSearch={(query) => console.log(query)}
+                    onSearch={handleSearchChange}
                     onToggleInStock={handleToggleInStock}
                     onCategoryChange={handleCategoryChange}
-                    onResetFilters={() => setFilteredProducts(products)}
+                    onApplyFilters={applyFilters}
+                    onResetFilters={resetFilters}
                     categories={categories}
                 />
 
-                <Box
-                    sx={{
-                        width:"100%",
-                       // flex: 1,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        padding: 2,
-                        marginLeft: isSidebarOpen ? '240px' : '0',
-                        transition: 'margin-left 0.3s ease',
-                        backgroundColor: '#101022',
-                        overflow: 'hidden',
-                    }}
-                >
+                <Box sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: 2,
+                    marginLeft: isSidebarOpen ? '240px' : '0',
+                    transition: 'margin-left 0.3s ease',
+                    backgroundColor: '#101022',
+                    overflow: 'hidden'
+                }}>
                     <ProductList products={filteredProducts} />
                 </Box>
             </Box>
@@ -82,3 +103,6 @@ const getUniqueCategories = (products: IProductProps[]) => {
 };
 
 export default App;
+
+
+
