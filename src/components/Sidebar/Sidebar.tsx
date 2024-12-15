@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState } from "react";
 import {
     Box,
     InputBase,
@@ -28,6 +28,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                                              onResetFilters,
                                              categories,
                                          }) => {
+    // State to track the selected category
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    // Handle category selection
+    const handleCategoryChange = (value) => {
+        setSelectedCategory(value); // Update the selected category in state
+        onCategoryChange(value); // Trigger the parent handler
+    };
+
     return (
         <Box
             sx={{
@@ -83,8 +92,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <FormControl fullWidth>
                     <InputLabel sx={{color: '#5f62ae'}}>Category</InputLabel>
                     <Select
-                        value=""
-                        onChange={(e) => onCategoryChange(e.target.value)}
+                        value={selectedCategory}
+                        onChange={(e) => handleCategoryChange(e.target.value)}
                         sx={{
                             backgroundColor: '#090d3c',
                             color: '#5f62ae',
