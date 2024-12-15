@@ -1,5 +1,15 @@
 ﻿import React from 'react';
-import { Box, InputBase, Checkbox, FormControlLabel, Select, MenuItem, Button, FormControl, InputLabel } from '@mui/material';
+import {
+    Box,
+    InputBase,
+    Checkbox,
+    FormControlLabel,
+    Select,
+    MenuItem,
+    Button,
+    FormControl,
+    InputLabel
+} from '@mui/material';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -7,9 +17,17 @@ interface SidebarProps {
     onToggleInStock: (checked: boolean) => void;
     onCategoryChange: (category: string) => void;
     onResetFilters: () => void;
+    categories: string[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, onCategoryChange, onResetFilters }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+                                             isOpen,
+                                             onSearch,
+                                             onToggleInStock,
+                                             onCategoryChange,
+                                             onResetFilters,
+                                             categories,
+                                         }) => {
     return (
         <Box
             sx={{
@@ -27,8 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                 pointerEvents: isOpen ? 'auto' : 'none',
             }}
         >
-            {/* Search input */}
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{mb: 2}}>
                 <InputBase
                     placeholder="Search products..."
                     sx={{
@@ -42,8 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                 />
             </Box>
 
-            {/* In stock checkbox */}
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{mb: 2}}>
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -63,9 +79,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                 />
             </Box>
 
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{mb: 2}}>
                 <FormControl fullWidth>
-                    <InputLabel sx={{ color: '#5f62ae' }}>Category</InputLabel>
+                    <InputLabel sx={{color: '#5f62ae'}}>Category</InputLabel>
                     <Select
                         value=""
                         onChange={(e) => onCategoryChange(e.target.value)}
@@ -81,13 +97,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onSearch, onToggleInStock, on
                         }}
                     >
                         <MenuItem value="">All Categories</MenuItem>
-                        <MenuItem value="Electronics">Electronics</MenuItem>
-                        <MenuItem value="Furniture">Furniture</MenuItem>
+                        {categories.map((category) => (
+                            <MenuItem key={category} value={category}>
+                                {category}
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
             </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{display: 'flex', flexDirection: 'column'}}>
                 <Button
                     onClick={onResetFilters}
                     sx={{

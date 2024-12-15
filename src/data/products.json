@@ -24,7 +24,7 @@
     "category": "Electronics",
     "quantity": 50,
     "unit": "pcs",
-    "image": "/src/assets/smartphone.png"
+      "image": "/src/assets/smartphone.png"
   },
   {
     "id": 4,

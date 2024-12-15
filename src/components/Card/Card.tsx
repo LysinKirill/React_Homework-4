@@ -1,8 +1,9 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardMedia, Typography, Tooltip, Dialog, DialogContent, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { IProductProps } from "./../ProductList/types";
 
+const PlaceholderImagePath = "/src/assets/empty_image_placeholder.png";
 
 const StyledCard = styled(Card)(() => ({
     width: 300,
@@ -10,7 +11,7 @@ const StyledCard = styled(Card)(() => ({
     overflow: "hidden",
     transition: "transform 0.3s ease-in-out",
     backgroundColor: "#256c6a",
-    padding: "16px",
+    padding: "8px",
     borderRadius: "8px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     "&:hover": {
@@ -29,17 +30,45 @@ const TruncatedText = styled(Typography)(() => ({
 
 const ProductCard: React.FC<IProductProps> = ({ name, image, description, category, quantity }) => {
     const [isModalOpen, setModalOpen] = useState(false);
+    const [validatedImage, setValidatedImage] = useState<string>(PlaceholderImagePath);
 
     const toggleModal = () => setModalOpen(!isModalOpen);
 
+    useEffect(() => {
+        if (image) {
+            const img = new Image();
+            img.src = image;
+
+            img.onload = () => setValidatedImage(image);
+            img.onerror = () => setValidatedImage(PlaceholderImagePath);
+        } else {
+            setValidatedImage(PlaceholderImagePath);
+        }
+    }, [image]);
+
     return (
         <>
-            <Tooltip title={<Typography sx={{ display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis" }}>{description}</Typography>} arrow placement="top">
+            <Tooltip
+                title={
+                    <Typography
+                        sx={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                        }}
+                    >
+                        {description}
+                    </Typography>
+                }
+                arrow
+                placement="top"
+            >
                 <StyledCard onClick={toggleModal}>
-                    {/* CardMedia with the requested image styling */}
                     <CardMedia
                         component="img"
-                        image={image}
+                        image={validatedImage}
                         alt={name}
                         sx={{
                             width: "50%",
@@ -79,7 +108,7 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                     <CardMedia
                         component="img"
                         height="300"
-                        image={image}
+                        image={validatedImage}
                         alt={name}
                         sx={{ objectFit: "contain", width: "100%" }}
                     />
