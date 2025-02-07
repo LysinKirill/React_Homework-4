@@ -83,7 +83,7 @@ const CategoriesPage: React.FC = () => {
                 ))}
             </List>
 
-            {/* Add Category Modal */}
+
             <Dialog open={isAddModalOpen} onClose={handleCloseAddModal}>
                 <Box sx={{ padding: 4 }}>
                     <Typography variant="h6">Add New Category</Typography>
@@ -100,7 +100,7 @@ const CategoriesPage: React.FC = () => {
                 </Box>
             </Dialog>
 
-            {/* Edit Category Modal */}
+
             <Dialog open={isEditModalOpen} onClose={handleCloseEditModal}>
                 <Box sx={{ padding: 4 }}>
                     <Typography variant="h6">Edit Category</Typography>

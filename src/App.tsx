@@ -10,6 +10,8 @@ import { setCategories } from './features/categories/categorySlice';
 import { IProductProps } from "./components/ProductList/types.ts";
 import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
 import CategoriesPage from "./components/CategoriesPage.tsx";
+import UserProfie from "./components/UserProfile/UserProfile.tsx";
+import UserProfile from "./components/UserProfile/UserProfile.tsx";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -93,6 +95,14 @@ const App: React.FC = () => {
                         <Route path="/products" element={<ProductList />} />
                         <Route path="/" element={<ProductList />} />
                         <Route path="/categories" element={<CategoriesPage />} />
+                        <Route path="/user" element={
+                            <UserProfile
+                                name={"Sample fullname"}
+                                email={"sample_email@gmail.com"}
+                                group={"sample group"}
+                                avatarUrl="/src/assets/priemlemo.png"
+                            />
+                        }/>
                     </Routes>
                 </Box>
             </Box>
