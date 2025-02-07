@@ -33,7 +33,7 @@ const TruncatedText = styled(Typography)(() => ({
     textOverflow: "ellipsis",
 }));
 
-const ProductCard: React.FC<IProductProps> = ({ name, image, description, category, quantity }) => {
+const ProductCard: React.FC<IProductProps> = ({ name, image, description, category, quantity, price }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [validatedImage, setValidatedImage] = useState<string>(PlaceholderImagePath);
 
@@ -96,6 +96,9 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                         <Typography variant="body1" color="text.primary">
                             In stock: {quantity}
                         </Typography>
+                        <Typography variant="body1" color="text.primary">
+                            Price: {price} USD
+                        </Typography>
                     </CardContent>
                 </StyledCard>
             </Tooltip>
@@ -113,6 +116,9 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                     </Typography>
                     <Typography variant="body1" color="text.primary">
                         Quantity: {quantity}
+                    </Typography>
+                    <Typography variant="body1" color="text.primary">
+                        Price: {price} USD
                     </Typography>
                     <CardMedia
                         component="img"

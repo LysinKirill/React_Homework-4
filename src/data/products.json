@@ -5,7 +5,7 @@
     "description": "A reliable, fuel-efficient sedan perfect for daily commuting and long road trips. Featuring advanced safety features, a spacious interior, and excellent fuel economy.",
     "category": "Auto",
     "quantity": 10,
-    "unit": "pcs",
+    "price": 2999,
     "image": "/src/assets/car.png"
   },
   {
@@ -14,7 +14,7 @@
     "description": "A high-performance electric bike designed for urban commuting. It features a long-lasting battery, adjustable speed modes, and a lightweight frame for a smooth ride.",
     "category": "Sports & Outdoors",
     "quantity": 0,
-    "unit": "pcs",
+    "price": 500,
     "image": "/src/assets/electric_bike.png"
   },
   {
@@ -23,8 +23,8 @@
     "description": "A cutting-edge smartphone with a stunning display, high-speed performance, and an advanced camera system. Comes with 128GB of storage and 5G connectivity.",
     "category": "Electronics",
     "quantity": 50,
-    "unit": "pcs",
-      "image": "/src/assets/smartphone.png"
+    "price": 129,
+    "image": "/src/assets/smartphone.png"
   },
   {
     "id": 4,
@@ -32,7 +32,7 @@
     "description": "A sleek, lightweight laptop with powerful specs for productivity and entertainment. Equipped with a high-resolution screen, long battery life, and fast processing power.",
     "category": "Electronics",
     "quantity": 15,
-    "unit": "pcs",
+    "price": 250,
     "image": "/src/assets/laptop.png"
   },
   {
@@ -41,7 +41,7 @@
     "description": "High-quality noise-canceling wireless headphones with deep bass and crystal-clear sound. Perfect for music lovers, commuters, and gamers.",
     "category": "Audio",
     "quantity": 30,
-    "unit": "pcs",
+    "price": 100,
     "image": "/src/assets/headphones.png"
   },
   {
@@ -50,7 +50,7 @@
     "description": "A premium coffee machine with a built-in grinder, multiple brewing options, and a sleek modern design. Ideal for home or office use.",
     "category": "Home Appliances",
     "quantity": 12,
-    "unit": "pcs",
+    "price": 125,
     "image": "/src/assets/coffee-machine.png"
   },
   {
@@ -59,7 +59,7 @@
     "description": "A stylish smartwatch that tracks your fitness, health metrics, and notifications. Features a heart rate monitor, GPS, and customizable watch faces.",
     "category": "Wearables",
     "quantity": 20,
-    "unit": "pcs",
+    "price": 79,
     "image": "/src/assets/smartwatch.png"
   },
   {
@@ -68,7 +68,7 @@
     "description": "A next-generation gaming console with stunning graphics, fast loading times, and access to a wide range of games. Compatible with VR and streaming services.",
     "category": "Gaming",
     "quantity": 8,
-    "unit": "pcs",
+    "price": 300,
     "image": "/src/assets/gaming-console.png"
   },
   {
@@ -77,7 +77,7 @@
     "description": "Ergonomically designed office chair for long hours of comfortable sitting. Adjustable height, lumbar support, and breathable fabric make it perfect for the workplace.",
     "category": "Furniture",
     "quantity": 25,
-    "unit": "pcs",
+    "price": 140,
     "image": "/src/assets/office-chair.png"
   },
   {
@@ -86,7 +86,7 @@
     "description": "Portable Bluetooth speaker with rich sound quality and a waterproof design. Perfect for outdoor adventures, beach trips, and casual listening.",
     "category": "Audio",
     "quantity": 40,
-    "unit": "pcs",
+    "price": 60,
     "image": "/src/assets/bluetooth-speaker.png"
   },
   {
@@ -95,7 +95,7 @@
     "description": "An electric scooter designed for fast and efficient urban transportation. With a range of up to 25 miles on a single charge, it's ideal for short commutes and city cruising.",
     "category": "Sports & Outdoors",
     "quantity": 18,
-    "unit": "pcs",
+    "price": 500,
     "image": "/src/assets/electric-scooter.png"
   },
   {
@@ -104,7 +104,7 @@
     "description": "A professional digital camera with high resolution and advanced features for photographers. Includes a 24MP sensor, 4K video recording, and built-in WiFi.",
     "category": "Electronics",
     "quantity": 10,
-    "unit": "pcs",
+    "price": 75,
     "image": "/src/assets/digital-camera.png"
   }
 ]

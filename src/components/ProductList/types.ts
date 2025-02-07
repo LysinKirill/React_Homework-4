@@ -4,7 +4,7 @@
     description: string;
     category: string;
     quantity: number;
-    unit: string;
+    price: number;
     image?: string;
 }
 

@@ -20,7 +20,7 @@ const ProductList: React.FC = () => {
         description: '',
         quantity: '',
         category: '',
-        unit: ''
+        price: ''
     });
 
     const itemsPerPage = 8;
@@ -49,7 +49,7 @@ const ProductList: React.FC = () => {
                 description: newProduct.description,
                 quantity: parseInt(newProduct.quantity),
                 category: newProduct.category,
-                unit: newProduct.unit ?? "USD"
+                price: parseInt(newProduct.price)
             };
             dispatch(addProduct(product));
             setNewProduct({
@@ -57,7 +57,7 @@ const ProductList: React.FC = () => {
                 description: newProduct.description,
                 quantity: newProduct.quantity,
                 category: newProduct.category,
-                unit: newProduct.unit
+                price: newProduct.price
             });
             handleCloseModal();
         }
@@ -172,9 +172,9 @@ const ProductList: React.FC = () => {
                     />
                     <TextField
                         fullWidth
-                        label="Unit"
-                        name="unit"
-                        value={newProduct.unit}
+                        label="Price"
+                        name="price"
+                        value={newProduct.price}
                         onChange={handleInputChange}
                         margin="normal"
                     />
