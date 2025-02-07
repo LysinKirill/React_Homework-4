@@ -11,7 +11,7 @@ import { deleteProduct, addProduct } from '../../features/products/productSlice'
 import {IProductProps} from "./types.ts";
 
 const ProductList: React.FC = () => {
-    const products = useSelector((state: RootState) => state.products.products);
+    const products = useSelector((state: RootState) => state.products.filteredProducts);
     const dispatch = useAppDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalOpen, setModalOpen] = useState(false);

@@ -1,13 +1,15 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IProductProps} from '../../components/ProductList/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IProductProps } from '../../components/ProductList/types';
 import products from '../../data/products.json';
 
 interface ProductState {
     products: IProductProps[];
+    filteredProducts: IProductProps[];
 }
 
 const initialState: ProductState = {
     products: products,
+    filteredProducts: products,
 };
 
 const productSlice = createSlice({
@@ -30,8 +32,11 @@ const productSlice = createSlice({
         setProducts: (state, action: PayloadAction<IProductProps[]>) => {
             state.products = action.payload;
         },
+        setFilteredProducts: (state, action: PayloadAction<IProductProps[]>) => {
+            state.filteredProducts = action.payload;
+        },
     },
 });
 
-export const { addProduct, updateProduct, deleteProduct, setProducts } = productSlice.actions;
+export const { addProduct, updateProduct, deleteProduct, setProducts, setFilteredProducts } = productSlice.actions;
 export default productSlice.reducer;

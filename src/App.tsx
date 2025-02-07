@@ -5,7 +5,7 @@ import NavigationBar from './components/NavigationBar/NavigationBar.tsx';
 import ProductList from './components/ProductList/ProductList.tsx';
 import Sidebar from './components/Sidebar/Sidebar.tsx';
 import { useAppDispatch, useAppSelector } from './store/hooks';
-import { setProducts } from './features/products/productSlice';
+import { setFilteredProducts } from './features/products/productSlice';
 import { setCategories } from './features/categories/categorySlice';
 import { IProductProps } from "./components/ProductList/types.ts";
 import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
@@ -16,6 +16,7 @@ const App: React.FC = () => {
     const dispatch = useAppDispatch();
     const { categories, products } = useAppSelector((state) => ({
         products: state.products.products,
+        filteredProducts: state.products.filteredProducts,
         categories: state.categories.categories,
     }));
 
@@ -60,18 +61,17 @@ const App: React.FC = () => {
             filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
         }
 
-        dispatch(setProducts(filteredProducts));
+        dispatch(setFilteredProducts(filteredProducts)); // Use setFilteredProducts here
     };
 
     const handleResetFilters = () => {
         setSearchQuery('');
         setIsInStock(false);
         setSelectedCategory('');
-        dispatch(setProducts(products));
+        dispatch(setFilteredProducts(products)); // Reset filtered products to all products
     };
 
     useEffect(() => {
-        dispatch(setProducts(products));
         dispatch(setCategories(getUniqueCategories(products)));
     }, [dispatch, products]);
 
@@ -94,14 +94,7 @@ const App: React.FC = () => {
                         <Route path="/products" element={<ProductList />} />
                         <Route path="/" element={<ProductList />} />
                         <Route path="/categories" element={<CategoriesPage />} />
-                        <Route path="/user" element={
-                            <UserProfile
-                                name={"Sample fullname"}
-                                email={"sample_email@gmail.com"}
-                                group={"sample group"}
-                                avatarUrl="/src/assets/priemlemo.png"
-                            />
-                        }/>
+                        <Route path="/user" element={<UserProfile name="Sample fullname" email="sample_email@gmail.com" group="sample group" avatarUrl="/src/assets/priemlemo.png" />} />
                     </Routes>
                 </Box>
             </Box>
@@ -118,6 +111,5 @@ const getUniqueCategories = (products: IProductProps[]) => {
 
     return Array.from(uniqueCategories);
 };
-
 
 export default App;
