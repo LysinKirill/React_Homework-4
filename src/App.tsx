@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar/NavigationBar.tsx';
 import ProductList from './components/ProductList/ProductList.tsx';
 import Sidebar from './components/Sidebar/Sidebar.tsx';
@@ -7,6 +8,7 @@ import { useAppDispatch, useAppSelector } from './store/hooks';
 import { setProducts } from './features/products/productSlice';
 import { setCategories } from './features/categories/categorySlice';
 import { IProductProps } from "./components/ProductList/types.ts";
+import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -73,7 +75,7 @@ const App: React.FC = () => {
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
-            <NavigationBar toggleSidebar={toggleSidebar}/>
+            <NavigationBar toggleSidebar={toggleSidebar} />
             <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width: '100%' }}>
                 <Sidebar
                     isOpen={isSidebarOpen}
@@ -85,14 +87,15 @@ const App: React.FC = () => {
                     categories={categories}
                 />
                 <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', padding: 2, backgroundColor: '#101022', overflow: 'hidden' }}>
-                    <ProductList />
+                    <Routes>
+                        <Route path="/products/:id" element={<ProductDetails />} />
+                        <Route path="/products" element={<ProductList />} />
+                    </Routes>
                 </Box>
             </Box>
         </Box>
     );
 };
-
-
 
 const getUniqueCategories = (products: IProductProps[]) => {
     const categoryCount: Record<string, number> = {};

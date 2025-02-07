@@ -4,13 +4,11 @@ import {
     CardContent,
     CardMedia,
     Typography,
-    Tooltip,
-    Dialog,
-    DialogContent,
-    Button,
+    Tooltip
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { IProductProps } from "../ProductList/types";
+import { useNavigate } from 'react-router-dom';
 
 const PlaceholderImagePath = "/src/assets/empty_image_placeholder.png";
 
@@ -33,11 +31,15 @@ const TruncatedText = styled(Typography)(() => ({
     textOverflow: "ellipsis",
 }));
 
-const ProductCard: React.FC<IProductProps> = ({ name, image, description, category, quantity, price }) => {
-    const [isModalOpen, setModalOpen] = useState(false);
+const ProductCard: React.FC<IProductProps> = ({ id, name, image, description, category, quantity, price }) => {
+    //const [isModalOpen, setModalOpen] = useState(false);
     const [validatedImage, setValidatedImage] = useState<string>(PlaceholderImagePath);
 
-    const toggleModal = () => setModalOpen(!isModalOpen);
+    //const toggleModal = () => setModalOpen(!isModalOpen);
+
+    const navigate = useNavigate();
+
+    const handleCardClick = () => navigate(`/products/${id}`);
 
     useEffect(() => {
         const validateImage = async () => {
@@ -74,7 +76,7 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                 arrow
                 placement="top"
             >
-                <StyledCard onClick={toggleModal}>
+                <StyledCard onClick={handleCardClick}>
                     <CardMedia
                         component="img"
                         image={validatedImage}
@@ -103,35 +105,35 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                 </StyledCard>
             </Tooltip>
 
-            <Dialog open={isModalOpen} onClose={toggleModal} maxWidth="md" fullWidth>
-                <DialogContent>
-                    <Typography variant="h4" gutterBottom>
-                        {name}
-                    </Typography>
-                    <Typography variant="body1" gutterBottom>
-                        {description}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Category: {category}
-                    </Typography>
-                    <Typography variant="body1" color="text.primary">
-                        Quantity: {quantity}
-                    </Typography>
-                    <Typography variant="body1" color="text.primary">
-                        Price: {price} USD
-                    </Typography>
-                    <CardMedia
-                        component="img"
-                        height="300"
-                        image={validatedImage}
-                        alt={name}
-                        sx={{ objectFit: "contain", width: "100%" }}
-                    />
-                    <Button onClick={toggleModal} sx={{ mt: 2 }} variant="contained">
-                        Close
-                    </Button>
-                </DialogContent>
-            </Dialog>
+            {/*<Dialog open={isModalOpen} onClose={toggleModal} maxWidth="md" fullWidth>*/}
+            {/*    <DialogContent>*/}
+            {/*        <Typography variant="h4" gutterBottom>*/}
+            {/*            {name}*/}
+            {/*        </Typography>*/}
+            {/*        <Typography variant="body1" gutterBottom>*/}
+            {/*            {description}*/}
+            {/*        </Typography>*/}
+            {/*        <Typography variant="body2" color="text.secondary">*/}
+            {/*            Category: {category}*/}
+            {/*        </Typography>*/}
+            {/*        <Typography variant="body1" color="text.primary">*/}
+            {/*            Quantity: {quantity}*/}
+            {/*        </Typography>*/}
+            {/*        <Typography variant="body1" color="text.primary">*/}
+            {/*            Price: {price} USD*/}
+            {/*        </Typography>*/}
+            {/*        <CardMedia*/}
+            {/*            component="img"*/}
+            {/*            height="300"*/}
+            {/*            image={validatedImage}*/}
+            {/*            alt={name}*/}
+            {/*            sx={{ objectFit: "contain", width: "100%" }}*/}
+            {/*        />*/}
+            {/*        <Button onClick={toggleModal} sx={{ mt: 2 }} variant="contained">*/}
+            {/*            Close*/}
+            {/*        </Button>*/}
+            {/*    </DialogContent>*/}
+            {/*</Dialog>*/}
         </>
     );
 };
