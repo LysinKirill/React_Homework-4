@@ -146,8 +146,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                     >
                         <MenuItem value="">All Categories</MenuItem>
                         {categories.map((category) => (
-                            <MenuItem key={category} value={category}>
-                                {category}
+                            <MenuItem key={category.id} value={category.name}>
+                                {category.name}
                             </MenuItem>
                         ))}
                     </Select>

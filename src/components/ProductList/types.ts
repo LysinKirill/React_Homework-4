@@ -12,3 +12,8 @@
 export interface ProductListProps {
     products: IProductProps[];
 }
+
+export interface ICategoryProps {
+    id: number;
+    name: string;
+}

@@ -1,11 +1,14 @@
 ﻿import React from 'react';
 import { AppBar, Toolbar, Button, Box } from '@mui/material';
+import {useNavigate} from "react-router-dom";
 
 interface NavigationBarProps {
     toggleSidebar: () => void;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
+    const navigate = useNavigate()
+
     return (
         <AppBar
             position="fixed"
@@ -63,6 +66,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
                             },
                             textTransform: 'none',
                         }}
+                        onClick={() => navigate('/')}
                     >
                         Products
                     </Button>
@@ -77,8 +81,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
                             },
                             textTransform: 'none',
                         }}
+                        onClick={() => navigate('/categories')}
                     >
-                        Warehouses
+                        Categories
                     </Button>
                     <Button
                         sx={{

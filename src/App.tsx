@@ -9,6 +9,7 @@ import { setProducts } from './features/products/productSlice';
 import { setCategories } from './features/categories/categorySlice';
 import { IProductProps } from "./components/ProductList/types.ts";
 import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
+import CategoriesPage from "./components/CategoriesPage.tsx";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -84,13 +85,14 @@ const App: React.FC = () => {
                     onCategoryChange={handleCategoryChange}
                     onApplyFilters={handleApplyFilters}
                     onResetFilters={handleResetFilters}
-                    categories={categories}
+                    categories={categories.map(x => x.name)}
                 />
                 <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', padding: 2, backgroundColor: '#101022', overflow: 'hidden' }}>
                     <Routes>
                         <Route path="/products/:id" element={<ProductDetails />} />
                         <Route path="/products" element={<ProductList />} />
                         <Route path="/" element={<ProductList />} />
+                        <Route path="/categories" element={<CategoriesPage />} />
                     </Routes>
                 </Box>
             </Box>
@@ -99,13 +101,14 @@ const App: React.FC = () => {
 };
 
 const getUniqueCategories = (products: IProductProps[]) => {
-    const categoryCount: Record<string, number> = {};
+    const uniqueCategories = new Set<IProductProps>();
+
     products.forEach((product) => {
-        categoryCount[product.category] = (categoryCount[product.category] || 0) + 1;
+        uniqueCategories.add(product);
     });
-    return Object.entries(categoryCount)
-        .sort(([, countA], [, countB]) => countB - countA)
-        .map(([category]) => category);
+
+    return Array.from(uniqueCategories);
 };
+
 
 export default App;
