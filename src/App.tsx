@@ -14,7 +14,7 @@ import UserProfile from "./components/UserProfile/UserProfile.tsx";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { categories, products } = useAppSelector((state) => ({
+    const { categories, products, filteredProducts } = useAppSelector((state) => ({
         products: state.products.products,
         filteredProducts: state.products.filteredProducts,
         categories: state.categories.categories,
@@ -61,19 +61,19 @@ const App: React.FC = () => {
             filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
         }
 
-        dispatch(setFilteredProducts(filteredProducts)); // Use setFilteredProducts here
+        dispatch(setFilteredProducts(filteredProducts));
     };
 
     const handleResetFilters = () => {
         setSearchQuery('');
         setIsInStock(false);
         setSelectedCategory('');
-        dispatch(setFilteredProducts(products)); // Reset filtered products to all products
+        dispatch(setFilteredProducts(products));
     };
 
     useEffect(() => {
         dispatch(setCategories(getUniqueCategories(products)));
-    }, [dispatch, products]);
+    }, [dispatch, products, filteredProducts]);
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
