@@ -32,6 +32,10 @@ const ProductDetails: React.FC = () => {
         setEditModalOpen(false);
     };
 
+    const handleBack = () => {
+        navigate("/");
+    };
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditedProduct({
             ...editedProduct,
@@ -54,6 +58,9 @@ const ProductDetails: React.FC = () => {
                 </Button>
                 <Button variant="contained" color="error" onClick={handleDelete}>
                     Delete Product
+                </Button>
+                <Button variant="contained" onClick={handleBack} sx={{ ml: 2}}>
+                    Back
                 </Button>
             </Box>
 

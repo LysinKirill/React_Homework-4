@@ -90,6 +90,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/products/:id" element={<ProductDetails />} />
                         <Route path="/products" element={<ProductList />} />
+                        <Route path="/" element={<ProductList />} />
                     </Routes>
                 </Box>
             </Box>
