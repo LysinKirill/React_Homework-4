@@ -4,6 +4,7 @@ import categoryReducer from '../features/categories/categorySlice';
 import modalReducer from '../features/modal/modalSlice';
 import sidebarReducer from '../features/sidebar/sidebarSlice';
 import filterReducer from '../features/filter/filterSlice';
+import logger from 'redux-logger';
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,8 @@ export const store = configureStore({
         sidebar: sidebarReducer,
         filter: filterReducer
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(logger),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

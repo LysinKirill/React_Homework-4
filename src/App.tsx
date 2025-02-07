@@ -10,7 +10,6 @@ import { setCategories } from './features/categories/categorySlice';
 import { IProductProps } from "./components/ProductList/types.ts";
 import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
 import CategoriesPage from "./components/CategoriesPage.tsx";
-import UserProfie from "./components/UserProfile/UserProfile.tsx";
 import UserProfile from "./components/UserProfile/UserProfile.tsx";
 
 const App: React.FC = () => {
