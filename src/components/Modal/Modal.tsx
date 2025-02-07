@@ -1,19 +1,21 @@
 ﻿import React from "react";
 import { Dialog, DialogContent, CardMedia, Typography, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { closeModal } from "../../features/modal/modalSlice";
 
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    name: string;
-    image: string;
-    description: string;
-    category: string;
-    quantity: number;
-}
+const Modal: React.FC = () => {
+    const dispatch = useDispatch();
+    const { isOpen, name, image, description, category, quantity } = useSelector(
+        (state: RootState) => state.modal
+    );
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, name, image, description, category, quantity }) => {
+    const handleClose = () => {
+        dispatch(closeModal());
+    };
+
     return (
-        <Dialog open={isOpen} onClose={onClose} maxWidth="md" fullWidth>
+        <Dialog open={isOpen} onClose={handleClose} maxWidth="md" fullWidth>
             <DialogContent>
                 <Typography variant="h4" gutterBottom>
                     {name}
@@ -34,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, name, image, description
                     alt={name}
                     sx={{ objectFit: "contain", width: "100%" }}
                 />
-                <Button onClick={onClose} sx={{ mt: 2 }} variant="contained">
+                <Button onClick={handleClose} sx={{ mt: 2 }} variant="contained">
                     Close
                 </Button>
             </DialogContent>

@@ -1,88 +1,101 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar/NavigationBar.tsx';
 import ProductList from './components/ProductList/ProductList.tsx';
 import Sidebar from './components/Sidebar/Sidebar.tsx';
-import products from './data/products.json';
-import { IProductProps } from './components/ProductList/types.ts';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { setFilteredProducts } from './features/products/productSlice';
+import { setCategories } from './features/categories/categorySlice';
+import { IProductProps } from "./components/ProductList/types.ts";
+import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
+import CategoriesPage from "./components/CategoriesPage.tsx";
+import UserProfile from "./components/UserProfile/UserProfile.tsx";
 
 const App: React.FC = () => {
-    const [isSidebarOpen, setSidebarOpen] = useState(true);
-    const [filteredProducts, setFilteredProducts] = useState(products);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [isInStock, setIsInStock] = useState(false);
+    const dispatch = useAppDispatch();
+    const { categories, products } = useAppSelector((state) => ({
+        products: state.products.products,
+        filteredProducts: state.products.filteredProducts,
+        categories: state.categories.categories,
+    }));
 
-    const categories = getUniqueCategories(products);
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isInStock, setIsInStock] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+        handleApplyFilters();
+    };
+
     const handleToggleInStock = (checked: boolean) => {
         setIsInStock(checked);
+        handleApplyFilters();
     };
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
+        handleApplyFilters();
     };
 
-    const handleSearchChange = (query: string) => {
-        setSearchQuery(query);
-    };
-
-    const applyFilters = () => {
-        let filtered = products;
+    const handleApplyFilters = () => {
+        let filteredProducts = products;
 
         if (searchQuery) {
-            const regex = new RegExp(searchQuery, 'i');
-            filtered = filtered.filter((product) => regex.test(product.name));
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
         }
 
         if (isInStock) {
-            filtered = filtered.filter((product) => product.quantity > 0);
+            filteredProducts = filteredProducts.filter(product => product.quantity > 0);
         }
 
-        if (selectedCategory && selectedCategory !== '') {
-            filtered = filtered.filter((product) => product.category === selectedCategory);
+        if (selectedCategory) {
+            filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
         }
 
-        setFilteredProducts(filtered);
+        dispatch(setFilteredProducts(filteredProducts)); // Use setFilteredProducts here
     };
 
-    const resetFilters = () => {
+    const handleResetFilters = () => {
         setSearchQuery('');
-        setSelectedCategory('');
         setIsInStock(false);
-        setFilteredProducts(products);
+        setSelectedCategory('');
+        dispatch(setFilteredProducts(products)); // Reset filtered products to all products
     };
+
+    useEffect(() => {
+        dispatch(setCategories(getUniqueCategories(products)));
+    }, [dispatch, products]);
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
             <NavigationBar toggleSidebar={toggleSidebar} />
-
             <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width: '100%' }}>
                 <Sidebar
                     isOpen={isSidebarOpen}
-                    onSearch={handleSearchChange}
+                    onSearch={handleSearch}
                     onToggleInStock={handleToggleInStock}
                     onCategoryChange={handleCategoryChange}
-                    onApplyFilters={applyFilters}
-                    onResetFilters={resetFilters}
-                    categories={categories}
+                    onApplyFilters={handleApplyFilters}
+                    onResetFilters={handleResetFilters}
+                    categories={categories.map(x => x.name)}
                 />
-
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: 2,
-                    marginLeft: isSidebarOpen ? '240px' : '0',
-                    transition: 'margin-left 0.3s ease',
-                    backgroundColor: '#101022',
-                    overflow: 'hidden'
-                }}>
-                    <ProductList products={filteredProducts} />
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', padding: 2, backgroundColor: '#101022', overflow: 'hidden' }}>
+                    <Routes>
+                        <Route path="/products/:id" element={<ProductDetails />} />
+                        <Route path="/products" element={<ProductList />} />
+                        <Route path="/" element={<ProductList />} />
+                        <Route path="/categories" element={<CategoriesPage />} />
+                        <Route path="/user" element={<UserProfile name="Sample fullname" email="sample_email@gmail.com" group="sample group" avatarUrl="/src/assets/priemlemo.png" />} />
+                    </Routes>
                 </Box>
             </Box>
         </Box>
@@ -90,18 +103,13 @@ const App: React.FC = () => {
 };
 
 const getUniqueCategories = (products: IProductProps[]) => {
-    const categoryCount: Record<string, number> = {};
+    const uniqueCategories = new Set<IProductProps>();
 
     products.forEach((product) => {
-        categoryCount[product.category] = (categoryCount[product.category] || 0) + 1;
+        uniqueCategories.add(product);
     });
 
-    return Object.entries(categoryCount)
-        .sort(([, countA], [, countB]) => countB - countA)
-        .map(([category]) => category);
+    return Array.from(uniqueCategories);
 };
 
 export default App;
-
-
-

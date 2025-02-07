@@ -4,11 +4,16 @@
     description: string;
     category: string;
     quantity: number;
-    unit: string;
+    price: number;
     image?: string;
 }
 
 
 export interface ProductListProps {
     products: IProductProps[];
+}
+
+export interface ICategoryProps {
+    id: number;
+    name: string;
 }
