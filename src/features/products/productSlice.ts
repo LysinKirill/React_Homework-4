@@ -1,12 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProductProps } from '../../components/ProductList/types';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IProductProps} from '../../components/ProductList/types';
+import products from '../../data/products.json';
 
 interface ProductState {
     products: IProductProps[];
 }
 
 const initialState: ProductState = {
-    products: [],
+    products: products,
 };
 
 const productSlice = createSlice({
@@ -14,6 +15,7 @@ const productSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action: PayloadAction<IProductProps>) => {
+            action.payload.id = Math.max(...state.products.map(o => o.id)) + 1;
             state.products.push(action.payload);
         },
         updateProduct: (state, action: PayloadAction<IProductProps>) => {

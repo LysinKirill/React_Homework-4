@@ -19,15 +19,10 @@ const StyledCard = styled(Card)(() => ({
     maxWidth: 300,
     margin: 16,
     overflow: "hidden",
-    transition: "transform 0.3s ease-in-out",
     backgroundColor: "#256c6a",
     padding: 8,
     borderRadius: 8,
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    "&:hover": {
-        transform: "scale(1.05)",
-        cursor: "pointer",
-    },
 }));
 
 const TruncatedText = styled(Typography)(() => ({

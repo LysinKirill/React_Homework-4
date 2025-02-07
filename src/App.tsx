@@ -6,12 +6,11 @@ import Sidebar from './components/Sidebar/Sidebar.tsx';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { setProducts } from './features/products/productSlice';
 import { setCategories } from './features/categories/categorySlice';
-import products from './data/products.json';
 import { IProductProps } from "./components/ProductList/types.ts";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { categories } = useAppSelector((state) => ({
+    const { categories, products } = useAppSelector((state) => ({
         products: state.products.products,
         categories: state.categories.categories,
     }));
@@ -70,7 +69,7 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(setProducts(products));
         dispatch(setCategories(getUniqueCategories(products)));
-    }, [dispatch]);
+    }, [dispatch, products]);
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
