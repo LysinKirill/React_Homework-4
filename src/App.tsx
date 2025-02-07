@@ -11,51 +11,70 @@ import { IProductProps } from "./components/ProductList/types.ts";
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { products: reduxProducts, categories } = useAppSelector((state) => ({
+    const { categories } = useAppSelector((state) => ({
         products: state.products.products,
         categories: state.categories.categories,
     }));
 
-    // Local state for managing sidebar and search
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
     const [isInStock, setIsInStock] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
 
-    useEffect(() => {
-        // Initialize products and categories from JSON data
-        dispatch(setProducts(products));
-        dispatch(setCategories(getUniqueCategories(products)));
-    }, [dispatch]);
+    const toggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
 
     const handleSearch = (query: string) => {
         setSearchQuery(query);
-        // You can filter products based on the search query here if needed
+        handleApplyFilters();
     };
 
     const handleToggleInStock = (checked: boolean) => {
         setIsInStock(checked);
-        // You can filter products based on inStock here if needed
+        handleApplyFilters();
     };
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
-        // You can filter products based on category here if needed
+        handleApplyFilters();
     };
 
     const handleApplyFilters = () => {
-        // Apply filters like inStock, category, etc.
+        let filteredProducts = products;
+
+        if (searchQuery) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+
+        if (isInStock) {
+            filteredProducts = filteredProducts.filter(product => product.quantity > 0);
+        }
+
+        if (selectedCategory) {
+            filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+        }
+
+        dispatch(setProducts(filteredProducts));
     };
 
     const handleResetFilters = () => {
         setSearchQuery('');
         setIsInStock(false);
         setSelectedCategory('');
+        dispatch(setProducts(products));
     };
+
+    useEffect(() => {
+        dispatch(setProducts(products));
+        dispatch(setCategories(getUniqueCategories(products)));
+    }, [dispatch]);
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
-            <NavigationBar />
+            <NavigationBar toggleSidebar={toggleSidebar}/>
             <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width: '100%' }}>
                 <Sidebar
                     isOpen={isSidebarOpen}
@@ -73,6 +92,8 @@ const App: React.FC = () => {
         </Box>
     );
 };
+
+
 
 const getUniqueCategories = (products: IProductProps[]) => {
     const categoryCount: Record<string, number> = {};

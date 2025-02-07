@@ -46,20 +46,23 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     const handleCategoryChange = (value: string) => {
         setSelectedCategory(value);
-        dispatch(setCategory(value));  // Dispatch action to update category filter
+        onCategoryChange(value);
+        dispatch(setCategory(value));
     };
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
-        dispatch(setSearchQuery(query));  // Dispatch action to update search query filter
+        onSearch(query);
+        dispatch(setSearchQuery(query));
     };
 
     const handleInStockChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        dispatch(setInStockFilter(checked));  // Dispatch action to update in-stock filter
+        onToggleInStock(checked);
+        dispatch(setInStockFilter(checked));
     };
 
     const handleClearSearch = () => {
-        dispatch(setSearchQuery(''));  // Clear search query in Redux
+        dispatch(setSearchQuery(''));
     };
 
     return (

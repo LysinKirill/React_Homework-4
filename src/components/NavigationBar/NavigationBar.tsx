@@ -1,59 +1,113 @@
-﻿import React from "react";
-import { AppBar, Toolbar, Button, Box } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { toggleSidebar } from "../../features/sidebar/sidebarSlice";
+﻿import React from 'react';
+import { AppBar, Toolbar, Button, Box } from '@mui/material';
 
-const NavigationBar: React.FC = () => {
-    const dispatch = useDispatch();
+interface NavigationBarProps {
+    toggleSidebar: () => void;
+}
 
+const NavigationBar: React.FC<NavigationBarProps> = ({ toggleSidebar }) => {
     return (
         <AppBar
             position="fixed"
             sx={{
                 top: 0,
                 left: 0,
-                width: "100%",
+                width: '100%',
                 zIndex: 10,
-                height: "60px",
-                backgroundColor: "#333",
-                padding: "0 16px",
+                height: '60px',
+                backgroundColor: '#333',
+                padding: '0 16px',
             }}
         >
             <Toolbar
                 sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    height: "100%",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    height: '100%',
                     padding: 0,
                 }}
             >
+
                 <Box
                     sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
+                        display: 'flex',
+                        justifyContent: 'space-evenly',
                         flexGrow: 1,
                     }}
                 >
                     <Button
-                        onClick={() => dispatch(toggleSidebar())}
+                        onClick={toggleSidebar}
                         sx={{
-                            backgroundColor: "transparent",
-                            color: "white",
-                            fontSize: "16px",
-                            "&:hover": {
-                                color: "#ddd",
-                                backgroundColor: "transparent",
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            fontSize: '16px',
+                            width: 'auto',
+                            '&:hover': {
+                                color: '#ddd',
+                                backgroundColor: 'transparent',
                             },
-                            textTransform: "none",
+                            textTransform: 'none',
                         }}
                     >
                         Menu
                     </Button>
-                    <Button sx={{ color: "white" }}>Products</Button>
-                    <Button sx={{ color: "white" }}>Warehouses</Button>
-                    <Button sx={{ color: "white" }}>About</Button>
-                    <Button sx={{ color: "white" }}>User</Button>
+                    <Button
+                        sx={{
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            fontSize: '16px',
+                            '&:hover': {
+                                color: '#ddd',
+                                backgroundColor: 'transparent',
+                            },
+                            textTransform: 'none',
+                        }}
+                    >
+                        Products
+                    </Button>
+                    <Button
+                        sx={{
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            fontSize: '16px',
+                            '&:hover': {
+                                color: '#ddd',
+                                backgroundColor: 'transparent',
+                            },
+                            textTransform: 'none',
+                        }}
+                    >
+                        Warehouses
+                    </Button>
+                    <Button
+                        sx={{
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            fontSize: '16px',
+                            '&:hover': {
+                                color: '#ddd',
+                                backgroundColor: 'transparent',
+                            },
+                            textTransform: 'none',
+                        }}
+                    >
+                        About
+                    </Button>
+                    <Button
+                        sx={{
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            fontSize: '16px',
+                            '&:hover': {
+                                color: '#ddd',
+                                backgroundColor: 'transparent',
+                            },
+                            textTransform: 'none',
+                        }}
+                    >
+                        User
+                    </Button>
                 </Box>
             </Toolbar>
         </AppBar>
