@@ -32,10 +32,8 @@ const TruncatedText = styled(Typography)(() => ({
 }));
 
 const ProductCard: React.FC<IProductProps> = ({ id, name, image, description, category, quantity, price }) => {
-    //const [isModalOpen, setModalOpen] = useState(false);
     const [validatedImage, setValidatedImage] = useState<string>(PlaceholderImagePath);
 
-    //const toggleModal = () => setModalOpen(!isModalOpen);
 
     const navigate = useNavigate();
 
