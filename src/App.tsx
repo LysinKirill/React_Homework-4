@@ -1,88 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import NavigationBar from './components/NavigationBar/NavigationBar.tsx';
 import ProductList from './components/ProductList/ProductList.tsx';
 import Sidebar from './components/Sidebar/Sidebar.tsx';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { setProducts } from './features/products/productSlice';
+import { setCategories } from './features/categories/categorySlice';
 import products from './data/products.json';
-import { IProductProps } from './components/ProductList/types.ts';
+import { IProductProps } from "./components/ProductList/types.ts";
 
 const App: React.FC = () => {
-    const [isSidebarOpen, setSidebarOpen] = useState(true);
-    const [filteredProducts, setFilteredProducts] = useState(products);
+    const dispatch = useAppDispatch();
+    const { products: reduxProducts, categories } = useAppSelector((state) => ({
+        products: state.products.products,
+        categories: state.categories.categories,
+    }));
+
+    // Local state for managing sidebar and search
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [isInStock, setIsInStock] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
-    const categories = getUniqueCategories(products);
+    useEffect(() => {
+        // Initialize products and categories from JSON data
+        dispatch(setProducts(products));
+        dispatch(setCategories(getUniqueCategories(products)));
+    }, [dispatch]);
 
-    const toggleSidebar = () => {
-        setSidebarOpen(!isSidebarOpen);
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+        // You can filter products based on the search query here if needed
     };
 
     const handleToggleInStock = (checked: boolean) => {
         setIsInStock(checked);
+        // You can filter products based on inStock here if needed
     };
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
+        // You can filter products based on category here if needed
     };
 
-    const handleSearchChange = (query: string) => {
-        setSearchQuery(query);
+    const handleApplyFilters = () => {
+        // Apply filters like inStock, category, etc.
     };
 
-    const applyFilters = () => {
-        let filtered = products;
-
-        if (searchQuery) {
-            const regex = new RegExp(searchQuery, 'i');
-            filtered = filtered.filter((product) => regex.test(product.name));
-        }
-
-        if (isInStock) {
-            filtered = filtered.filter((product) => product.quantity > 0);
-        }
-
-        if (selectedCategory && selectedCategory !== '') {
-            filtered = filtered.filter((product) => product.category === selectedCategory);
-        }
-
-        setFilteredProducts(filtered);
-    };
-
-    const resetFilters = () => {
+    const handleResetFilters = () => {
         setSearchQuery('');
-        setSelectedCategory('');
         setIsInStock(false);
-        setFilteredProducts(products);
+        setSelectedCategory('');
     };
 
     return (
         <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#101022', overflow: 'hidden', width: '100vw' }}>
-            <NavigationBar toggleSidebar={toggleSidebar} />
-
+            <NavigationBar />
             <Box sx={{ display: 'flex', flex: 1, marginTop: '64px', overflow: 'hidden', width: '100%' }}>
                 <Sidebar
                     isOpen={isSidebarOpen}
-                    onSearch={handleSearchChange}
+                    onSearch={handleSearch}
                     onToggleInStock={handleToggleInStock}
                     onCategoryChange={handleCategoryChange}
-                    onApplyFilters={applyFilters}
-                    onResetFilters={resetFilters}
+                    onApplyFilters={handleApplyFilters}
+                    onResetFilters={handleResetFilters}
                     categories={categories}
                 />
-
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: 2,
-                    marginLeft: isSidebarOpen ? '240px' : '0',
-                    transition: 'margin-left 0.3s ease',
-                    backgroundColor: '#101022',
-                    overflow: 'hidden'
-                }}>
-                    <ProductList products={filteredProducts} />
+                <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', padding: 2, backgroundColor: '#101022', overflow: 'hidden' }}>
+                    <ProductList />
                 </Box>
             </Box>
         </Box>
@@ -91,17 +76,12 @@ const App: React.FC = () => {
 
 const getUniqueCategories = (products: IProductProps[]) => {
     const categoryCount: Record<string, number> = {};
-
     products.forEach((product) => {
         categoryCount[product.category] = (categoryCount[product.category] || 0) + 1;
     });
-
     return Object.entries(categoryCount)
         .sort(([, countA], [, countB]) => countB - countA)
         .map(([category]) => category);
 };
 
 export default App;
-
-
-

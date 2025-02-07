@@ -1,9 +1,12 @@
 ﻿import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Grid, Pagination } from '@mui/material';
 import ProductCard from '../Card/Card';
-import { ProductListProps } from './types.ts';
+import { RootState } from '../../store/store';  // Adjust the path as needed
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+
+const ProductList: React.FC = () => {
+    const products = useSelector((state: RootState) => state.products.products);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
@@ -15,6 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
+
 
     return (
         <Box
@@ -68,4 +72,3 @@ const ProductList: React.FC<ProductListProps> = ({ products }) => {
 };
 
 export default ProductList;
-

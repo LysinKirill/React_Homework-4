@@ -1,21 +1,31 @@
 ﻿import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardMedia, Typography, Tooltip, Dialog, DialogContent, Button } from "@mui/material";
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+    Tooltip,
+    Dialog,
+    DialogContent,
+    Button,
+} from "@mui/material";
 import { styled } from "@mui/system";
-import { IProductProps } from "./../ProductList/types";
+import { IProductProps } from "../ProductList/types";
 
 const PlaceholderImagePath = "/src/assets/empty_image_placeholder.png";
 
 const StyledCard = styled(Card)(() => ({
-    width: 300,
+    width: '100%',
+    maxWidth: 300,
     margin: 16,
     overflow: "hidden",
     transition: "transform 0.3s ease-in-out",
     backgroundColor: "#256c6a",
-    padding: "8px",
-    borderRadius: "8px",
+    padding: 8,
+    borderRadius: 8,
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     "&:hover": {
-        transform: "scale(1.1)",
+        transform: "scale(1.05)",
         cursor: "pointer",
     },
 }));
@@ -35,15 +45,19 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
     const toggleModal = () => setModalOpen(!isModalOpen);
 
     useEffect(() => {
-        if (image) {
-            const img = new Image();
-            img.src = image;
+        const validateImage = async () => {
+            if (!image) return;
+            try {
+                const img = new Image();
+                img.src = image;
+                await img.decode();
+                setValidatedImage(image);
+            } catch {
+                setValidatedImage(PlaceholderImagePath);
+            }
+        };
 
-            img.onload = () => setValidatedImage(image);
-            img.onerror = () => setValidatedImage(PlaceholderImagePath);
-        } else {
-            setValidatedImage(PlaceholderImagePath);
-        }
+        validateImage();
     }, [image]);
 
     return (
@@ -71,8 +85,8 @@ const ProductCard: React.FC<IProductProps> = ({ name, image, description, catego
                         image={validatedImage}
                         alt={name}
                         sx={{
-                            width: "50%",
-                            height: "auto",
+                            width: "100%",
+                            maxHeight: 150,
                             objectFit: "contain",
                             margin: "10px auto",
                         }}

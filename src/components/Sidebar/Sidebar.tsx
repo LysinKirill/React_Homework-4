@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState } from 'react';
 import {
     Box,
     InputBase,
@@ -12,9 +12,12 @@ import {
     InputAdornment,
     IconButton
 } from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear'; // Import the clear icon
+import ClearIcon from '@mui/icons-material/Clear';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { setCategory, setSearchQuery, setInStockFilter } from '../../features/filter/filterSlice';
 
-interface SidebarProps {
+export interface SidebarProps {
     isOpen: boolean;
     onSearch: (query: string) => void;
     onToggleInStock: (checked: boolean) => void;
@@ -24,38 +27,39 @@ interface SidebarProps {
     categories: string[];
 }
 
+
 const Sidebar: React.FC<SidebarProps> = ({
                                              isOpen,
                                              onSearch,
                                              onToggleInStock,
                                              onCategoryChange,
                                              onApplyFilters,
-                                             onResetFilters,
-                                             categories,
+                                             onResetFilters
                                          }) => {
+    const dispatch = useDispatch();
+
+    const categories = useSelector((state: RootState) => state.categories.categories);
+    const searchQuery = useSelector((state: RootState) => state.filter.searchQuery);
+    const isInStock = useSelector((state: RootState) => state.filter.inStock);
 
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [searchQuery, setSearchQuery] = useState("");
-    const [isInStock, setIsInStock] = useState(false);
 
     const handleCategoryChange = (value: string) => {
         setSelectedCategory(value);
-        onCategoryChange(value);
+        dispatch(setCategory(value));  // Dispatch action to update category filter
     };
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(event.target.value);
-        onSearch(event.target.value);
+        const query = event.target.value;
+        dispatch(setSearchQuery(query));  // Dispatch action to update search query filter
     };
 
     const handleInStockChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        setIsInStock(checked);
-        onToggleInStock(checked);
+        dispatch(setInStockFilter(checked));  // Dispatch action to update in-stock filter
     };
 
     const handleClearSearch = () => {
-        setSearchQuery('');
-        onSearch('');
+        dispatch(setSearchQuery(''));  // Clear search query in Redux
     };
 
     return (
