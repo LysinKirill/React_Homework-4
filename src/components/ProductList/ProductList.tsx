@@ -1,12 +1,15 @@
 ﻿import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Grid, Pagination } from '@mui/material';
+import { useAppDispatch } from '../../store/hooks';
+import { Box, Grid, Pagination, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ProductCard from '../Card/Card';
-import { RootState } from '../../store/store';  // Adjust the path as needed
-
+import { RootState } from '../../store/store'; // Adjust the path as needed
+import { deleteProduct } from '../../features/products/productSlice';
 
 const ProductList: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.products);
+    const dispatch = useAppDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
 
@@ -14,16 +17,19 @@ const ProductList: React.FC = () => {
         setCurrentPage(page);
     };
 
+    const handleDeleteProduct = (id: number) => {
+        dispatch(deleteProduct(id));
+    };
+
     const paginatedProducts = products.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
-
     return (
         <Box
             sx={{
-                width: "100%",
+                width: '100%',
                 flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
@@ -42,7 +48,24 @@ const ProductList: React.FC = () => {
             >
                 {paginatedProducts.map((product) => (
                     <Grid item xs={12} sm={6} md={3} key={product.id}>
-                        <ProductCard {...product} />
+                        <Box sx={{ position: 'relative' }}>
+                            <ProductCard {...product} />
+                            <IconButton
+                                onClick={() => handleDeleteProduct(product.id)}
+                                sx={{
+                                    position: 'absolute',
+                                    top: 8,
+                                    right: 50,
+                                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                    color: '#fff',
+                                    '&:hover': {
+                                        backgroundColor: 'rgba(255, 0, 0, 0.8)',
+                                    },
+                                }}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                        </Box>
                     </Grid>
                 ))}
                 {products.length === 0 && (
