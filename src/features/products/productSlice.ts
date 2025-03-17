@@ -19,6 +19,7 @@ const productSlice = createSlice({
         addProduct: (state, action: PayloadAction<IProductProps>) => {
             action.payload.id = Math.max(...state.products.map(o => o.id)) + 1;
             state.products.push(action.payload);
+            state.filteredProducts.push(action.payload);
         },
         updateProduct: (state, action: PayloadAction<IProductProps>) => {
             const index = state.products.findIndex((p) => p.id === action.payload.id);
