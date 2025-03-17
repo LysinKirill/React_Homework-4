@@ -56,8 +56,8 @@ const CategoriesPage: React.FC = () => {
         }
     };
 
-    const handleDeleteCategory = (id: number) => {
-        const updatedCategories = categories.filter((cat) => cat.id !== id);
+    const handleDeleteCategory = (name: string) => {
+        const updatedCategories = categories.filter((cat) => cat.name !== name);
         dispatch(setCategories(updatedCategories));
     };
 
@@ -76,7 +76,7 @@ const CategoriesPage: React.FC = () => {
                         <IconButton onClick={() => handleEditCategory(category)}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton onClick={() => handleDeleteCategory(category.id)}>
+                        <IconButton onClick={() => handleDeleteCategory(category.name)}>
                             <DeleteIcon />
                         </IconButton>
                     </ListItem>

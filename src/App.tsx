@@ -7,7 +7,7 @@ import Sidebar from './components/Sidebar/Sidebar.tsx';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { setFilteredProducts } from './features/products/productSlice';
 import { setCategories } from './features/categories/categorySlice';
-import { IProductProps } from "./components/ProductList/types.ts";
+import {ICategoryProps, IProductProps} from "./components/ProductList/types.ts";
 import ProductDetails from "./components/ProductDetails/ProductDetails.tsx";
 import CategoriesPage from "./components/CategoriesPage.tsx";
 import UserProfile from "./components/UserProfile/UserProfile.tsx";
@@ -103,10 +103,10 @@ const App: React.FC = () => {
 };
 
 const getUniqueCategories = (products: IProductProps[]) => {
-    const uniqueCategories = new Set<IProductProps>();
+    const uniqueCategories = new Set<ICategoryProps>();
 
     products.forEach((product) => {
-        uniqueCategories.add(product);
+        uniqueCategories.add({id: 0, name: product.category, });
     });
 
     return Array.from(uniqueCategories);
